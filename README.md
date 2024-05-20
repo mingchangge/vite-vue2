@@ -36,4 +36,28 @@
 - -w(--workspace)： install 命令也是支持多工作区安装的
 - -ws(--workspaces)：设置为 false 时，禁用 workspaces
 
-4. package.json key build 增加 "npmRebuild": "false",
+4. 发布的打包版本仍有多余的 app.asar.unpacked 目录
+   ![alt text](image.png)
+   依赖 bigint-buffer 是因为 fhevmjs 解密的时候用到了这两个方法 https://github.com/zama-ai/fhevmjs/blob/main/src/utils.ts
+   `import { toBigIntBE, toBufferBE } from 'bigint-buffer';`
+   而检查 bigint-buffer 中这两个方法的实现：https://github.com/no2chem/bigint-buffer/blob/master/src/index.ts
+
+   ```export function toBigIntBE(buf: Buffer): bigint {
+   if (process.browser || converter === undefined) {
+     const hex = buf.toString('hex');
+     if (hex.length === 0) {
+       return BigInt(0);
+     }
+     return BigInt(`0x${hex}`);
+   }
+   return converter.toBigInt(buf, true);
+   }
+   ```
+
+   只有在 node.js 环境中运行的时候才会使用 C 语言写的 native 版本，在浏览器中执行时会回落到纯 js 的实现，而我们用到 fhevm.js 加解密都是在浏览器中执行的。因此不需要 native 的版本
+
+- 禁止编译 native 的 node_modules
+  - package.json key build 增加 "npmRebuild": "false",
+  - 手动打包没有了 app.asar.unpacked, 但是自动构建发布的版本还是有, 可能与 USE_HARD_LINKS 有关
+  - 因为禁用了 npm 的 rebuild，不再需要使用 USE_HARD_LINKS
+- 禁用 smartUnpack 同时不需要设置 USE_HARD_LINKS
