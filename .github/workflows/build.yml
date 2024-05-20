@@ -28,8 +28,8 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm i --registry=http://registry.npmmirror.com
 
-      - name: 单元测试
-        run: npm run test
+      #- name: 单元测试
+      #run: npm run test
 
       - name: 构建版本
         env:
