@@ -61,3 +61,10 @@
   - 手动打包没有了 app.asar.unpacked, 但是自动构建发布的版本还是有, 可能与 USE_HARD_LINKS 有关
   - 因为禁用了 npm 的 rebuild，不再需要使用 USE_HARD_LINKS
 - 禁用 smartUnpack 同时不需要设置 USE_HARD_LINKS
+
+5. src/app.vue 重命名 src/App.vue
+
+- git 大小写不敏感
+- 执行 git config --global core.ignorecase false，全局设置 大小写敏感
+- 直接使用以下命令重命名文件
+- git mv -f src/app.vue src/App.vue
