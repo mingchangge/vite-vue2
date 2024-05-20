@@ -1,0 +1,61 @@
+name: 版本发布
+on:
+  push:
+    ## 以下两个条件是或的关系
+    branches:
+      - master
+    tags:
+      - v**  
+
+jobs:
+  发布:
+    runs-on: macOS
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 15
+        
+      - name: 计算哈希
+        uses: seepine/hash-files@v1
+        id: get-hash
+        with: 
+          patterns: |-
+            package.json
+            package-lock.json            
+
+      - name: 保存缓存
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ChainTradeClient-${{ steps.get-hash.outputs.hash }}
+
+      - name: 安装依赖
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm i --registry=http://registry.npmmirror.com
+
+      - name: 构建发布(开发版)
+        if: ${{ gitea.ref_name == 'master' }}
+        env:
+          MINIO_USER: ${{ secrets.MINIO_USER }}
+          MINIO_PASS: ${{ secrets.MINIO_PASS }}
+          MODE: dev
+        run: node scripts/release.js
+
+      - name: 构建发布(测试版)
+        if: ${{ startsWith(gitea.ref_name, 'v')  && contains(gitea.ref_name, 'rc') }}
+        env:
+          MINIO_USER: ${{ secrets.MINIO_USER }}
+          MINIO_PASS: ${{ secrets.MINIO_PASS }}
+          MODE: staging
+        run: node scripts/release.js
+
+      - name: 构建发布(正式版)
+        if: ${{ startsWith(gitea.ref_name, 'v')  && !contains(gitea.ref_name, 'rc') }}
+        env:
+          MINIO_USER: ${{ secrets.MINIO_USER }}
+          MINIO_PASS: ${{ secrets.MINIO_PASS }}
+          MODE: prod
+        run: node scripts/release.js
