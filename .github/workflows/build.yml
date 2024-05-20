@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   continuous_build:
-    runs-on: macOS
+    runs-on: ubuntu-latest
 
     steps:
       - name: 检出代码
