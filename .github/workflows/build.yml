@@ -22,7 +22,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: ChainTradeClient-${{ steps.get-hash.outputs.hash }}
+          key: vite-vue2-${{ steps.get-hash.outputs.hash }}
 
       - name: 安装依赖
         if: steps.cache.outputs.cache-hit != 'true'
