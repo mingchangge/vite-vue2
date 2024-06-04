@@ -51,6 +51,19 @@ export default defineConfig(({ mode }) => {
   ];
 
   return defineConfig({
+    test: {
+      /**
+       * 测试环境配置
+       * Vitest 支持happy-dom或jsdom来模拟DOM和浏览器API
+       * 它们不随Vitest提供，因此安装它们是必需的
+       * npm i -D happy-dom or npm i -D jsdom
+       */
+      environment: "happy-dom",
+      reporters: ["default", "html"],
+      coverage: {
+        reportsDirectory: "./test/unit/coverage",
+      },
+    },
     root,
     plugins,
     resolve: {

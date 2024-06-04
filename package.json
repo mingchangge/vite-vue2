@@ -8,26 +8,36 @@
     "build": "vite build",
     "build-mac": "vite build --mode dev && electron-builder --mac",
     "build-win": "vite build --mode dev && electron-builder --win",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "vite --mode dev && electron .",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "test-ui": "vite build --mode dev && vitest run --ui"
   },
   "devDependencies": {
     "@vitejs/plugin-vue2": "^2.3.1",
+    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/ui": "^1.6.0",
     "electron": "^24.1.2",
     "electron-builder": "^24.13.3",
     "electron-builder-notarize": "^1.5.2",
     "element-ui": "^2.15.14",
     "gm-crypto": "^0.1.12",
+    "happy-dom": "^14.12.0",
     "less": "^4.2.0",
     "pinia": "^2.1.7",
     "vite": "^4.4.9",
     "vite-plugin-electron": "^0.28.7",
     "vite-plugin-node-polyfills": "^0.21.0",
+    "vitest": "^1.6.0",
     "vue": "^2.7.5"
   },
   "dependencies": {
     "electron-log": "^5.1.4",
     "electron-store": "^9.0.0",
     "electron-updater": "^6.1.8",
+    "ethers": "^6.12.1",
+    "fhevmjs": "^0.4.0",
     "vue-router": "^3.5.4"
   },
   "build": {
@@ -39,7 +49,9 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
     },
-    "asar": true,
+    "asar": {
+      "smartUnpack": false
+    },
     "publish": {
       "provider": "s3",
       "bucket": "public",

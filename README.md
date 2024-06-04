@@ -60,7 +60,16 @@
   - package.json key build 增加 "npmRebuild": "false",
   - 手动打包没有了 app.asar.unpacked, 但是自动构建发布的版本还是有, 可能与 USE_HARD_LINKS 有关
   - 因为禁用了 npm 的 rebuild，不再需要使用 USE_HARD_LINKS
-- 禁用 smartUnpack 同时不需要设置 USE_HARD_LINKS
+- 禁用 smartUnpack 同时不需要设置 USE_HARD_LINKS(本项目打包构建过程没有出现错误，客户端错误使用其修复)
+  ```
+     "asar": true,
+  ```
+  改为
+  ```
+   "asar": {
+      "smartUnpack": false
+    },
+  ```
 
 5. src/app.vue 重命名 src/App.vue
 
@@ -68,3 +77,16 @@
 - 执行 git config --global core.ignorecase false，全局设置 大小写敏感
 - 直接使用以下命令重命名文件
 - git mv -f src/app.vue src/App.vue
+
+6. 测试覆盖率
+
+- 代码覆盖率是一种用于评估代码的质量和完整性的指标，它表示代码中有多少比例被测试用例所覆盖。测试覆盖率的工具可以帮助开发者生成和查看覆盖率报告，从而发现代码中的潜在问题和改进点。
+  package.json 中添加以下代码：
+
+  ```
+  　"scripts": {
+  　　    "coverage": "vitest run --coverage"
+  　　  },
+  ```
+
+- npm run test-ui 命令输出错误可改用 npx vite preview --outDir html 打开 test UI 页面
