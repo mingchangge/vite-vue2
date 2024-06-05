@@ -78,7 +78,14 @@
 - 直接使用以下命令重命名文件
 - git mv -f src/app.vue src/App.vue
 
-6. 测试覆盖率
+6. vitest
+
+- npm install -D vitest
+- npm i -D happy-dom
+- npm i -D @vitest/coverage-v8
+- npm i -D @vitest/ui
+
+7. 测试覆盖率
 
 - 代码覆盖率是一种用于评估代码的质量和完整性的指标，它表示代码中有多少比例被测试用例所覆盖。测试覆盖率的工具可以帮助开发者生成和查看覆盖率报告，从而发现代码中的潜在问题和改进点。
   package.json 中添加以下代码：

@@ -60,8 +60,9 @@ export default defineConfig(({ mode }) => {
        */
       environment: "happy-dom",
       reporters: ["default", "html"],
+      outputFile: "./src/test/html/test-report.html",
       coverage: {
-        reportsDirectory: "./test/unit/coverage",
+        reportsDirectory: "./src/test/coverage",
       },
     },
     root,
