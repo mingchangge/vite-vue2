@@ -5,6 +5,7 @@
     <p>count值：{{ count }}</p>
     <p>当前时间：{{ new Date() }}</p>
     <p>sm3加密值：{{ sm3Value }}</p>
+    <LineGraph />
   </div>
 </template>
 
@@ -12,9 +13,13 @@
 import { mapState, mapActions } from "pinia";
 import { useDemoStore } from "@/store";
 import { sm3 } from "@/utils/crypto.js";
+import LineGraph from "@/views/echarts/line.vue";
 
 export default {
   name: "Home",
+  components: {
+    LineGraph,
+  },
   data() {
     return {
       sm3Value: sm3("123456"),

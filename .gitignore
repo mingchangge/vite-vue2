@@ -14,7 +14,8 @@ release
 dist-ssr
 *.local
 
-test
+src/test/html
+src/test/coverage
 
 # Editor directories and files
 .vscode/*

@@ -63,3 +63,5 @@ class MyInterval {
     }
   }
 }
+
+export default MyInterval;
