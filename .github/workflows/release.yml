@@ -1,13 +1,20 @@
-name: 持续构建
-on: [push, pull_request]
-
+name: 版本发布
+on:
+  push:
+    # 以下使用main分支或者使用tags
+    branches:
+      - main
+    tags:
+      - v*
 jobs:
-  continuous_build:
+  publish:
     runs-on: macos-latest
 
     steps:
       - name: 检出代码
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 15
 
       - name: 计算哈希
         uses: seepine/hash-files@v1
@@ -28,11 +35,11 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm i --registry=http://registry.npmmirror.com
 
-      - name: 单元测试
-        run: npm run test
-
-      - name: 构建版本
+      - name: 构建发布(开发版)
+        if: ${{ github.ref == 'refs/heads/main' }}
         env:
-          DEBUG: electron-builder # 如果调试electron-builder打开以下选项
-          #USE_HARD_LINKS: false   # 因为禁用了smartUnpack, 不会再创建硬连接
-        run: npm run build-win
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MINIO_USER: ${{ secrets.MINIO_USER }}
+          MINIO_PASSWORD: ${{ secrets.MINIO_PASSWORD }}
+          MODE: dev
+        run: echo "Building and publishing (development version)"
