@@ -114,7 +114,7 @@ let updateInProcess = false;
 let updateConfirmed = false;
 
 let appId = app.getName();
-
+// 检查更新
 function startUpdater() {
   if (!app.isPackaged) {
     return;
@@ -165,7 +165,7 @@ let mainURL = mainURLRoot + landingPage;
 
 console.log("mainURL", mainURL);
 
-//Electron 是否显示标题栏，true 显示（未登录），false 隐藏（登录后）
+// 创建浏览器窗口
 async function createWindow() {
   // 创建浏览器窗口
   const partition = "persist:user-" + userIndex;
@@ -272,7 +272,7 @@ async function createWindow() {
     // ref: https://code.webterren.com/dist-vite-Terren/ChainTradeClient/pulls/579#issuecomment-1260997
     process.exit(0);
   });
-  //
+  //渲染进程不响应时触发
   mWindow.webContents.on("unresponsive", () => {
     log.error("unresponsive");
     const options = {
@@ -304,7 +304,7 @@ async function createWindow() {
 
 const loginWindowSize = { width: 1170, height: 850 };
 const mainWindowSize = { width: 1800, height: 1000 };
-
+// 计算窗口大小
 function calculateSize() {
   // 探测屏幕测尺寸
   const electron = require("electron");
@@ -346,28 +346,7 @@ function installIPCHandle() {
     mWindow.center();
     destroyBrowserView(mWindow);
   });
-
-  /* 
-  //最小化窗口
-    ipcMain.on("minimize-window", (event) => {
-    const mWindow = BrowserWindow.fromWebContents(event.sender);
-    mWindow.minimize();
-  });
-  // 最大化窗口
-  ipcMain.on("maximize-window", (event) => {
-    const mWindow = BrowserWindow.fromWebContents(event.sender);
-    if (mWindow.isMaximized()) {
-      mWindow.unmaximize();
-    } else {
-      mWindow.maximize();
-    }
-  });
-  // 关闭窗口
-  ipcMain.on("close-window", (event) => {
-    const mWindow = BrowserWindow.fromWebContents(event.sender);
-    mWindow.close();
-  }); */
-  //
+  // 获取应用信息
   ipcMain.handle("get-app-info", () => {
     return {
       name: app.getName(),
@@ -375,7 +354,7 @@ function installIPCHandle() {
       isDev,
     };
   });
-
+  // 切换主题
   ipcMain.handle("toggle-dark-mode", () => {
     if (nativeTheme.shouldUseDarkColors) {
       nativeTheme.themeSource = "light";
@@ -384,7 +363,7 @@ function installIPCHandle() {
     }
     return nativeTheme.shouldUseDarkColors;
   });
-
+  //打开开发者工具
   ipcMain.on("open-dev-tools", (event) => {
     event.sender.openDevTools();
   });

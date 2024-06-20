@@ -1,9 +1,11 @@
 name: 版本发布
 on:
   push:
-    # 以下使用main分支或者使用tags
+    # push 事件具有 branches 筛选器，该筛选器仅在发生目标为与 branches 筛选器匹配的分支的推送时（而不是在发生任何推送时）运行工作流
     branches:
       - main
+    #与 ref 匹配的模式序列。支持通配符。例如，refs/tags/v* 匹配所有以 v 开头的标签。
+    #与 refs/heads 匹配的模式序列。支持通配符。例如，refs/heads/feature/* 匹配所有以 refs/heads/feature/ 开头的分支。
     tags:
       - v*
 jobs:
