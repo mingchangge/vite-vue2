@@ -10,7 +10,8 @@ on:
       - v*
 jobs:
   publish:
-    runs-on: macos-latest
+    #runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: 检出代码

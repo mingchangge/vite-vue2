@@ -1,4 +1,7 @@
-name: CI
+# yaml 锚点笔记（gitea）
+
+```
+name: 构建
 on:
   push:
     ## 以下二者是或的关系
@@ -6,7 +9,6 @@ on:
       - master
     tags:
       - v**
-
 复用锚点: &repeat
   - name: Checkout
     uses: actions/checkout@v3
@@ -87,3 +89,5 @@ jobs:
       docker-tag: ${{ gitea.ref_name }}
       kube-config: ${{ secrets.KUBE_CONFIG }}
     steps: *repeat
+
+```
