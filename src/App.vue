@@ -1,49 +1,23 @@
 <template>
   <div id="app">
-    <div
-      v-if="isElectron"
-      :class="['custom-titlebar', isMac ? 'mac' : 'win']"
-    />
-    <el-container class="wrapper">
-      <el-aside width="200px">
-        <el-menu :default-active="menuActive" router>
-          <el-menu-item index="/home">
-            <i class="el-icon-menu"></i>
-            <span slot="title">首页</span>
-          </el-menu-item>
-          <el-menu-item index="/fhevm">
-            <i class="el-icon-menu"></i>
-            <span slot="title">fhevm</span>
-          </el-menu-item>
-        </el-menu>
-      </el-aside>
-      <el-container>
-        <el-main>
-          <router-view />
-        </el-main>
-      </el-container>
-    </el-container>
+    <ElectronTab>
+      <router-view />
+    </ElectronTab>
   </div>
 </template>
 
 <script>
+import ElectronTab from "@/layouts/components/ElectronTab";
+
 export default {
   name: "App",
+  components: {
+    ElectronTab,
+  },
   data() {
-    return {
-      menuActive: "/home",
-      isElectron: undefined,
-      isMac: false,
-    };
+    return {};
   },
-  created() {
-    console.log("created");
-    // 判断是否是mac系统
-    let isMac = /macintosh|mac os x/i.test(navigator.userAgent);
-    let isWin = /windows|win32/i.test(navigator.userAgent);
-    this.isElectron = window.electronAPI;
-    this.isMac = window.electronAPI && !isWin && isMac;
-  },
+  created() {},
   methods: {},
 };
 </script>
@@ -67,18 +41,5 @@ export default {
 
   /* 设置该属性表明这是可拖拽区域，用来移动窗口 */
   -webkit-app-region: drag;
-}
-.wrapper {
-  width: 100%;
-  height: calc(100vh - 37px);
-  background: #d3d4d6;
-  overflow: hidden;
-  .el-aside {
-    height: 100%;
-    background: #fff;
-    .el-menu {
-      height: 100%;
-    }
-  }
 }
 </style>

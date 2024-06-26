@@ -11,19 +11,16 @@ const {
   screen,
 } = require("electron");
 
-import { autoUpdater } from "electron-updater";
-import { release } from "node:os";
-import path from "path";
-import fs from "fs";
-import log from "electron-log";
-import store from "electron-store";
-import { initTab, destroyBrowserView } from "./tabs";
+const { autoUpdater } = require("electron-updater");
+const { release } = require("node:os");
+const path = require("path");
+const fs = require("fs");
+const log = require("electron-log");
+const store = require("electron-store");
+const { initTab, destroyBrowserView } = require("./tabs");
 
 const isMac = process.platform === "darwin";
-const isDev = import.meta.env.MODE === "dev";
-
-log.info("isDev=====:", isDev, import.meta.env.MODE);
-
+const isDev = process.env.npm_lifecycle_script.includes("dev");
 const appConfig = new store();
 
 // From https://www.electronjs.org/docs/latest/api/menu

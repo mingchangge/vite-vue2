@@ -2,7 +2,7 @@
   "name": "vite-vue2",
   "private": true,
   "version": "0.0.0",
-  "main": "dist-electron/main.js",
+  "main": "electron/main.js",
   "scripts": {
     "dev": "vite --mode dev",
     "build": "vite build",
@@ -44,7 +44,7 @@
   "dependencies": {
     "echarts": "^5.5.0",
     "electron-log": "^5.1.4",
-    "electron-store": "^9.0.0",
+    "electron-store": "^8.1.0",
     "electron-updater": "^6.1.8",
     "ethers": "^6.12.1",
     "fhevmjs": "^0.4.0",

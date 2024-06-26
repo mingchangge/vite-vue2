@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import BaseLayout from "@/layouts/BaseLayout.vue";
+import commonRouteModules from "./modules";
 
 Vue.use(VueRouter);
 //添加以下代码
@@ -10,15 +12,15 @@ VueRouter.prototype.push = function push(location) {
 
 const routes = [
   {
-    path: "/home",
-    name: "Home",
-    component: () => import("@/views/Home.vue"),
+    path: "/",
+    component: BaseLayout,
+    redirect: "/home",
+    children: [...commonRouteModules],
   },
-  {
-    path: "/fhevm",
-    name: "Fhevm",
-    component: () => import("@/views/fhevm"),
-  },
+  // {
+  //   path: '/login',
+  //   component: () => import('@/views/login-page')
+  // }
 ];
 
 export const router = new VueRouter({
