@@ -94,7 +94,7 @@
     },
     "files": [
       "dist-vite/**/*",
-      "dist-electron/**/*"
+      "electron/**/*"
     ],
     "directories": {
       "output": "release"
