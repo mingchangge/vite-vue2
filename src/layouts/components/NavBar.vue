@@ -29,6 +29,7 @@ export default {
       navMenu: [
         { name: "首页", path: "home" },
         { name: "blockChain", path: "blockChain" },
+        { name: "菜单页", path: "menu-page" },
       ],
     };
   },

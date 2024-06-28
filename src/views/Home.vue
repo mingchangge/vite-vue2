@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <h1>pinia HMR测试</h1>
     <button @click="accumulate">点击+1</button>
     <p>count值：{{ count }}</p>
@@ -37,4 +37,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.home {
+  width: 90%;
+  margin: 0 auto;
+}
+</style>

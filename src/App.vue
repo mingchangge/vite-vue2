@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div v-loading="loading">
     <ElectronTab>
       <router-view />
     </ElectronTab>
@@ -15,7 +15,9 @@ export default {
     ElectronTab,
   },
   data() {
-    return {};
+    return {
+      loading: false,
+    };
   },
   created() {},
   methods: {},

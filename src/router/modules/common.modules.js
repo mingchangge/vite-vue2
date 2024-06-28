@@ -1,6 +1,5 @@
 // 可导入多个模块，每个模块对应一个路由模块
-// import ordersManageModules from '@/router/modules/orders-manage.modules'
-// import supportingServicesModules from '@/router/modules/supporting-services.modules'
+import menuPageModules from "@/router/modules/menu-page.modules";
 
 export default [
   {
@@ -13,11 +12,12 @@ export default [
     name: "BlockChain",
     component: () => import("@/views/fhevm"),
   },
-  // {
-  //   path: 'orders-manage',
-  //   component: () => import('@/views/orders-manage'),
-  //   meta: { title: '订单管理', hidden: true },
-  //   redirect: 'orders-manage/listing-publish',
-  //   children: [...ordersManageModules, ...supportingServicesModules]
-  // },
+  {
+    path: "/menu-page",
+    name: "MenuPage",
+    component: () => import("@/views/menu-page"),
+    meta: { title: "菜单页面" },
+    redirect: "/menu-page/menu-page-1",
+    children: [...menuPageModules],
+  },
 ];
