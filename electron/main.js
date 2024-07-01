@@ -20,7 +20,7 @@ const store = require("electron-store");
 const { initTab, destroyBrowserView } = require("./tabs");
 
 const isMac = process.platform === "darwin";
-const isDev = process.env.npm_lifecycle_script.includes("dev");
+const isDev = process.env.MAIN_VITE_ENV === "dev"; // 通过环境变量判断是否是开发环境
 const appConfig = new store();
 
 // From https://www.electronjs.org/docs/latest/api/menu

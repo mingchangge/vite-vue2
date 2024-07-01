@@ -24,6 +24,10 @@ export default defineConfig(({ mode }) => {
             minify: !isDev,
           },
         },
+        envPrefix: "MAIN_VITE_", // 环境变量前缀
+        define: {
+          ENV: mode,
+        },
       },
       preload: {
         input: {
