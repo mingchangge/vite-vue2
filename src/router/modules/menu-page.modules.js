@@ -1,7 +1,13 @@
 export default [
   {
-    path: "menu-page-1",
-    component: () => import("@/views/menu-page/MenuPage1.vue"),
-    meta: { title: "menu-page-1" },
+    path: "esm-commonjs-page",
+    component: () =>
+      import("@/views/esm-commonjs-page/DifferenceEsmCommonjs.vue"),
+    meta: { title: "ESM & CommonJS的不同" },
+  },
+  {
+    path: "imperative-components-page",
+    component: () => import("@/views/imperative-components-page/index.vue"),
+    meta: { title: "命令式组件" },
   },
 ];

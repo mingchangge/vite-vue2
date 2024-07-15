@@ -5,12 +5,11 @@ import vue from "@vitejs/plugin-vue2";
 import electron from "vite-plugin-electron/simple";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
-export default defineConfig(({ mode }) => {
+export default ({ mode }) => {
   // 同步删除给定路径上的文件-->清空dist-vite目录
   rmSync("dist-vite", { recursive: true, force: true });
   // 同步删除给定路径上的文件-->清空dist-electron目录
   rmSync("dist-electron", { recursive: true, force: true });
-
   const root = process.cwd();
   const isDev = mode === "dev";
   // 插件
@@ -23,10 +22,6 @@ export default defineConfig(({ mode }) => {
           build: {
             minify: !isDev,
           },
-        },
-        envPrefix: "MAIN_VITE_", // 环境变量前缀
-        define: {
-          ENV: mode,
         },
       },
       preload: {
@@ -100,7 +95,7 @@ export default defineConfig(({ mode }) => {
       },
     },
   });
-});
+};
 
 function pathResolve(dir) {
   return resolve(process.cwd(), ".", dir);

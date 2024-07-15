@@ -3,6 +3,7 @@
 ## 解决问题：
 
 1. gm-crypto electron 打包后报 Buffer 的错误
+2. electron 主进程从 esm 改回 commonjs 写法
 
 ## 备忘录
 

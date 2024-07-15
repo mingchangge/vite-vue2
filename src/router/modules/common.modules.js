@@ -17,7 +17,7 @@ export default [
     name: "MenuPage",
     component: () => import("@/views/menu-page"),
     meta: { title: "菜单页面" },
-    redirect: "/menu-page/menu-page-1",
+    redirect: "/menu-page/esm-commonjs-page",
     children: [...menuPageModules],
   },
 ];
