@@ -1,18 +1,29 @@
 <template>
   <div>
-    <h1>echarts折线图</h1>
-    <div id="line" style="width: 600px; height: 400px"></div>
+    <h1>Echarts折线图</h1>
+    <el-row :gutter="10">
+      <el-col :span="12">
+        <EChartsComponent :options="lineData" />
+      </el-col>
+      <el-col :span="12">
+        <EChartsComponent :options="hotCommodityData" />
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
-import * as echarts from "echarts";
+import EChartsComponent from "@/components/Echarts/index.vue";
 
 export default {
   name: "LineGraph",
+  components: {
+    EChartsComponent,
+  },
   data() {
     return {
-      line: null,
+      lineData: undefined,
+      hotCommodityData: undefined,
     };
   },
   mounted() {
@@ -20,8 +31,7 @@ export default {
   },
   methods: {
     init() {
-      this.line = echarts.init(document.getElementById("line"));
-      this.line.setOption({
+      this.lineData = {
         title: {
           text: "Rainfall and Flow Relationship",
           left: "center",
@@ -190,7 +200,90 @@ export default {
             ],
           },
         ],
-      });
+      };
+      this.hotCommodityData = {
+        title: {
+          text: "全部",
+          left: "center",
+        },
+        // legend: {
+        //   bottom: 0,
+        //   left: 'center',
+        //   data: ['预购', '预售']
+        // },
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow",
+          },
+        },
+        grid: {
+          top: 30,
+          left: 40,
+          right: 40,
+          containLabel: true,
+        },
+        xAxis: {
+          type: "value",
+          boundaryGap: [0, 0.01],
+        },
+        yAxis: {
+          type: "category",
+          data: ["动力煤", "洗煤", "甲醇", "炼焦煤", "化肥"],
+        },
+        series: [
+          {
+            name: "预购",
+            type: "bar",
+            stack: "total",
+            itemStyle: {
+              color: function (params) {
+                //  .btn-grad {
+                //     background-image: linear-gradient(to right, #ffd89b 0%, #19547b  51%, #ffd89b  100%);
+                //     margin: 10px;
+                //     padding: 15px 45px;
+                //     text-align: center;
+                //     text-transform: uppercase;
+                //     transition: 0.5s;
+                //     background-size: 200% auto;
+                //     color: white;
+                //     box-shadow: 0 0 20px #eee;
+                //     border-radius: 10px;
+                //     display: block;
+                //   }
+
+                var colorList = [
+                  "#5470c6",
+                  "#ee6666",
+                  "#5593b7",
+                  "#ca605d",
+                  "#efd79b",
+                ];
+                return colorList[params.dataIndex];
+              },
+            },
+            data: [18203, 23489, 29034, 104970, 131744],
+          },
+          {
+            name: "预售",
+            type: "bar",
+            stack: "total",
+            itemStyle: {
+              color: function (params) {
+                var colorList = [
+                  "#91cc75",
+                  "#fac858",
+                  "#58badd",
+                  "#db8e78",
+                  "#f6efa6",
+                ];
+                return colorList[params.dataIndex];
+              },
+            },
+            data: [19325, 23438, 31000, 121594, 134141],
+          },
+        ],
+      };
     },
     exportTable2() {
       console.log("---exportTable");
