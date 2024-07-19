@@ -4,6 +4,7 @@
 
 1. gm-crypto electron 打包后报 Buffer 的错误
 2. electron 主进程从 esm 改回 commonjs 写法
+3. G6 版本 4.8.24 和最新版 5.0.10 导入方式有变化，应用时写法理应有变化，新版本按需倒入，后续项目可以试下
 
 ## 备忘录
 

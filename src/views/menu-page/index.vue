@@ -31,30 +31,21 @@ export default {
           menuPath: "/menu-page/imperative-components-page",
           menuIcon: "el-icon-s-data",
         },
-        // {
-        //   menuName: "BBB",
-        //   menuIcon: "el-icon-s-data",
-        //   menuImage: "",
-        //   children: [
-        //     {
-        //       menuName: "BBB-1",
-        //       children: [
-        //         {
-        //           menuName: "BBB-1-1",
-        //           menuPath: "/menu-page/menu-page-b1",
-        //         },
-        //         {
-        //           menuName: "BBB-1-2",
-        //           menuPath: "/menu-page/menu-page-b12",
-        //         },
-        //       ],
-        //     },
-        //     {
-        //       menuName: "BBB-2",
-        //       menuPath: "/menu-page/menu-page-b2",
-        //     },
-        //   ],
-        // },
+        {
+          menuName: "树图",
+          menuIcon: "el-icon-s-data",
+          menuImage: "",
+          children: [
+            {
+              menuName: "20240718",
+              menuPath: "/menu-page/order-tree-graph/20240718",
+            },
+            {
+              menuName: "20240719",
+              menuPath: "/menu-page/order-tree-graph/20240719",
+            },
+          ],
+        },
         // {
         //   menuName: "CCC",
         //   menuIcon: "el-icon-s-order",
